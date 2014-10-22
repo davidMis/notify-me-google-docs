@@ -1,6 +1,5 @@
-package com.davidmis.pushnewsfeed;
+package com.davidmis.notifyme;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.ListFragment;
@@ -12,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -23,6 +21,8 @@ import java.util.List;
 public class NewsfeedListFragment extends ListFragment {
     private static final String TAG = "NewsfeedListFragment";
     private List<NewsfeedItem> newsfeedItems;
+
+    private MenuItem refreshMenuItem;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,23 +51,37 @@ public class NewsfeedListFragment extends ListFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_newsfeed_list, menu);
-
+        refreshMenuItem = menu.findItem(R.id.menu_item_refresh);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_item_refresh:
-                new RepoUpdater().execute();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item == refreshMenuItem) {
+            new RepoUpdater().execute();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
     }
 
+    private void showLoadingIndicator(boolean show) {
+        Log.i(TAG, "In showLoadingIndicator. Param: " + show);
 
+        if(refreshMenuItem == null) {
+            return;
+        }
+
+        if(show) {
+            refreshMenuItem.setEnabled(false);
+            refreshMenuItem.setActionView(R.layout.actionbar_indeterminate_progress);
+        } else {
+            refreshMenuItem.setActionView(null);
+            refreshMenuItem.setEnabled(true);
+        }
+    }
 
     private class NewsfeedAdapter extends ArrayAdapter<NewsfeedItem> {
 
@@ -94,6 +108,11 @@ public class NewsfeedListFragment extends ListFragment {
     }
 
     private class RepoUpdater extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected  void onPreExecute() {
+   //         super.onPreExecute();
+            showLoadingIndicator(true);
+        }
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -102,7 +121,8 @@ public class NewsfeedListFragment extends ListFragment {
         }
 
         @Override
-        protected void onPostExecute(Void v) {
+        protected void onPostExecute(Void result) {
+  //          super.onPostExecute(result);
             newsfeedItems = NewsfeedRepo.getInstance(getActivity()).getItems();
 
             for(NewsfeedItem item : newsfeedItems) {
@@ -112,6 +132,7 @@ public class NewsfeedListFragment extends ListFragment {
             ((NewsfeedAdapter)getListAdapter()).notifyDataSetChanged();
             NewsfeedAdapter adapter = new NewsfeedAdapter(newsfeedItems);
             setListAdapter(adapter);
+            showLoadingIndicator(false);
         }
     }
 }

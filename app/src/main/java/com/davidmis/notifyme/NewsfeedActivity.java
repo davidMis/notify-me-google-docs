@@ -1,18 +1,13 @@
-package com.davidmis.pushnewsfeed;
+package com.davidmis.notifyme;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+
 import com.parse.Parse;
-import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParsePush;
-import com.parse.PushService;
 import com.parse.SaveCallback;
 
 public class NewsfeedActivity extends SingleFragmentActivity {

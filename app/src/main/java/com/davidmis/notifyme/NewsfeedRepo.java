@@ -1,7 +1,6 @@
-package com.davidmis.pushnewsfeed;
+package com.davidmis.notifyme;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.util.Log;
 
 import java.io.IOException;

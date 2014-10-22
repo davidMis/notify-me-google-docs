@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.davidmis.pushnewsfeed" >
+    package="com.davidmis.notifyme" >
 
 
 
@@ -19,7 +19,7 @@
       to match your app's package name + ".permission.C2D_MESSAGE".
     -->
     <permission android:protectionLevel="signature"
-        android:name="com.davidmis.pushnewsfeed.permission.C2D_MESSAGE" />
+        android:name="com.davidmis.notifyme.permission.C2D_MESSAGE" />
     <uses-permission android:name="com.davidmis.pushnewsfeed.permission.C2D_MESSAGE" />
 
 
@@ -33,7 +33,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".NewsfeedActivity"
+            android:name="com.davidmis.notifyme.NewsfeedActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

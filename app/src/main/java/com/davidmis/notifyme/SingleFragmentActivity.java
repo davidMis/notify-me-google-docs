@@ -1,4 +1,4 @@
-package com.davidmis.pushnewsfeed;
+package com.davidmis.notifyme;
 
 import android.app.Activity;
 import android.app.Fragment;

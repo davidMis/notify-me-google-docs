@@ -1,37 +1,18 @@
-package com.davidmis.pushnewsfeed;
+package com.davidmis.notifyme;
 
 import android.util.Log;
-
-import com.google.gdata.client.spreadsheet.SpreadsheetService;
-import com.google.gdata.data.spreadsheet.SpreadsheetEntry;
-import com.google.gdata.data.spreadsheet.SpreadsheetFeed;
-import com.google.gdata.data.spreadsheet.WorksheetEntry;
-import com.google.gdata.util.AuthenticationException;
-import com.google.gdata.util.ServiceException;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
 import parser.NotificationRow;
-import parser.Row;
 import parser.XMLDAO;
 
 /**
