@@ -151,6 +151,9 @@ public class NewsfeedListFragment extends ListFragment {
             ((NewsfeedAdapter)getListAdapter()).notifyDataSetChanged();
             NewsfeedAdapter adapter = new NewsfeedAdapter(notifications);
             setListAdapter(adapter);
+
+            NotificationRepo.getInstance(getActivity()).saveNotifications();
+
             showLoadingIndicator(false);
         }
     }
