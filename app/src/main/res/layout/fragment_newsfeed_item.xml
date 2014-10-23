@@ -11,14 +11,14 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Notification Title"
-        android:id="@+id/notification_title"
+        android:id="@+id/newsfeed_notification_title"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp" />
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/notification_text"
+        android:id="@+id/newsfeed_notification_text"
         android:layout_marginRight="8dp"
         android:layout_marginLeft="8dp" />
 </LinearLayout>

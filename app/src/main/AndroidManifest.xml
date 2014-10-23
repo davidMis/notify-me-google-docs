@@ -33,7 +33,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.davidmis.notifyme.NewsfeedActivity"
+            android:name="com.davidmis.notifyme.controller.NewsfeedActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,6 +43,9 @@
             <!-- replace @drawable/push_icon with your push icon identifier
             <meta-data android:name="com.parse.push.notification_icon" android:resource="@drawable/push_icon"/>  -->
         </activity>
+        <activity android:name=".controller.NotificationActivity"
+            android:label="@string/app_name"
+        />
 
 
 

@@ -1,9 +1,11 @@
-package com.davidmis.notifyme;
+package com.davidmis.notifyme.controller;
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
+
+import com.davidmis.notifyme.R;
 
 /**
  * Created by David on 10/15/2014.

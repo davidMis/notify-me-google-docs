@@ -1,4 +1,4 @@
-package com.davidmis.notifyme;
+package com.davidmis.notifyme.model;
 
 import android.util.Log;
 
@@ -21,15 +21,15 @@ import parser.XMLDAO;
 public class MessageFetcher {
     private static String TAG = "MessageFetcher";
 
-    public List<NewsfeedItem> getMessages() throws  IOException {
-        List<NewsfeedItem> items = new ArrayList<NewsfeedItem>();
+    public List<Notification> getMessages() throws  IOException {
+        List<Notification> items = new ArrayList<Notification>();
 
         XMLDAO xmldao = new XMLDAO(40,10);
         xmldao.readXML(getXMLString());
         List<NotificationRow> rows = xmldao.getNotificationRows();
 
         for(NotificationRow row : rows) {
-            NewsfeedItem item = new NewsfeedItem();
+            Notification item = new Notification();
             item.setTitle(row.getTitle());
             item.setMessage(row.getBody());
             items.add(item);

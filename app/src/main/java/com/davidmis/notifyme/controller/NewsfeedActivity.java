@@ -1,4 +1,4 @@
-package com.davidmis.notifyme;
+package com.davidmis.notifyme.controller;
 
 import android.app.Fragment;
 import android.os.Bundle;

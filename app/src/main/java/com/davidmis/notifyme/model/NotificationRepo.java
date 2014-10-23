@@ -1,4 +1,4 @@
-package com.davidmis.notifyme;
+package com.davidmis.notifyme.model;
 
 import android.content.Context;
 import android.util.Log;
@@ -10,18 +10,18 @@ import java.util.List;
 /**
  * Created by David on 10/19/2014.
  */
-public class NewsfeedRepo {
-    private static NewsfeedRepo instance;
+public class NotificationRepo {
+    private static NotificationRepo instance;
     private static String TAG = "NewsfeedRepo";
     private Context appContext;
-    private List<NewsfeedItem> items;
+    private List<Notification> items;
 
-    private NewsfeedRepo(Context applicationContext) {
+    private NotificationRepo(Context applicationContext) {
         this.appContext = applicationContext;
-        items = new ArrayList<NewsfeedItem>();
+        items = new ArrayList<Notification>();
     }
 
-    public List<NewsfeedItem> getItems() {
+    public List<Notification> getItems() {
         return items;
     }
 
@@ -37,9 +37,9 @@ public class NewsfeedRepo {
         }
     }
 
-    public static NewsfeedRepo getInstance(Context c) {
+    public static NotificationRepo getInstance(Context c) {
         if(instance == null) {
-            instance = new NewsfeedRepo(c.getApplicationContext());
+            instance = new NotificationRepo(c.getApplicationContext());
         }
 
         return instance;

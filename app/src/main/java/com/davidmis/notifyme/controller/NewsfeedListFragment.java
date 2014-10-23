@@ -1,5 +1,6 @@
-package com.davidmis.notifyme;
+package com.davidmis.notifyme.controller;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.ListFragment;
@@ -11,7 +12,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import com.davidmis.notifyme.R;
+import com.davidmis.notifyme.model.Notification;
+import com.davidmis.notifyme.model.NotificationRepo;
 
 import java.util.List;
 
@@ -20,7 +26,7 @@ import java.util.List;
  */
 public class NewsfeedListFragment extends ListFragment {
     private static final String TAG = "NewsfeedListFragment";
-    private List<NewsfeedItem> newsfeedItems;
+    private List<Notification> notifications;
 
     private MenuItem refreshMenuItem;
 
@@ -28,11 +34,11 @@ public class NewsfeedListFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        newsfeedItems = NewsfeedRepo.getInstance(getActivity()).getItems();
+        notifications = NotificationRepo.getInstance(getActivity()).getItems();
         setRetainInstance(true);
         setHasOptionsMenu(true);
 
-        NewsfeedAdapter adapter = new NewsfeedAdapter(newsfeedItems);
+        NewsfeedAdapter adapter = new NewsfeedAdapter(notifications);
         setListAdapter(adapter);
     }
 
@@ -83,10 +89,20 @@ public class NewsfeedListFragment extends ListFragment {
         }
     }
 
-    private class NewsfeedAdapter extends ArrayAdapter<NewsfeedItem> {
+    @Override
+    public void onListItemClick(ListView listView, View view, int position, long id) {
+        startNotificationActivity();
+    }
 
-        public NewsfeedAdapter(List<NewsfeedItem> newsfeedItems) {
-            super(getActivity(), 0, newsfeedItems);
+    private void startNotificationActivity() {
+        Intent i = new Intent(getActivity(), NotificationActivity.class);
+        startActivity(i);
+    }
+
+    private class NewsfeedAdapter extends ArrayAdapter<Notification> {
+
+        public NewsfeedAdapter(List<Notification> notifications) {
+            super(getActivity(), 0, notifications);
         }
 
         @Override
@@ -95,7 +111,7 @@ public class NewsfeedListFragment extends ListFragment {
                 convertView = getActivity().getLayoutInflater().inflate(R.layout.list_item_newsfeed, null);
             }
 
-            NewsfeedItem item = getItem(position);
+            Notification item = getItem(position);
 
             TextView titleView = (TextView) convertView.findViewById(R.id.newsfeed_item_title);
             titleView.setText(item.getTitle());
@@ -116,21 +132,21 @@ public class NewsfeedListFragment extends ListFragment {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            NewsfeedRepo.getInstance(getActivity()).updateRepo();
+            NotificationRepo.getInstance(getActivity()).updateRepo();
             return null;
         }
 
         @Override
         protected void onPostExecute(Void result) {
   //          super.onPostExecute(result);
-            newsfeedItems = NewsfeedRepo.getInstance(getActivity()).getItems();
+            notifications = NotificationRepo.getInstance(getActivity()).getItems();
 
-            for(NewsfeedItem item : newsfeedItems) {
+            for(Notification item : notifications) {
                 Log.i(TAG, "Fetched item: " + item.getTitle());
             }
 
             ((NewsfeedAdapter)getListAdapter()).notifyDataSetChanged();
-            NewsfeedAdapter adapter = new NewsfeedAdapter(newsfeedItems);
+            NewsfeedAdapter adapter = new NewsfeedAdapter(notifications);
             setListAdapter(adapter);
             showLoadingIndicator(false);
         }
