@@ -1,6 +1,7 @@
 package com.davidmis.notifyme.model;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * Created by David on 10/19/2014.
@@ -8,6 +9,7 @@ import java.io.Serializable;
 public class Notification implements Serializable{
     private String message;
     private String title;
+    private final UUID uuid = UUID.randomUUID();;
 
     public Notification() {
 
@@ -34,4 +36,7 @@ public class Notification implements Serializable{
         this.message = message;
     }
 
+    public UUID getUuid() {
+        return this.uuid;
+    }
 }

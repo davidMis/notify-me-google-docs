@@ -20,6 +20,7 @@ import com.davidmis.notifyme.model.Notification;
 import com.davidmis.notifyme.model.NotificationRepo;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by David on 10/19/2014.
@@ -91,11 +92,13 @@ public class NewsfeedListFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
-        startNotificationActivity();
+        UUID uuid = ((NewsfeedAdapter)getListAdapter()).getItem(position).getUuid();
+        startNotificationActivity(uuid);
     }
 
-    private void startNotificationActivity() {
+    private void startNotificationActivity(UUID uuid) {
         Intent i = new Intent(getActivity(), NotificationActivity.class);
+        i.putExtra(NotificationFragment.EXTRA_UUID, uuid);
         startActivity(i);
     }
 

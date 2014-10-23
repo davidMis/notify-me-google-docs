@@ -6,6 +6,7 @@ import android.util.Log;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by David on 10/19/2014.
@@ -35,6 +36,15 @@ public class NotificationRepo {
         } catch (IOException e) {
             Log.e(TAG, "Failed to fetch messages");
         }
+    }
+
+    public Notification getByUuid(UUID uuid) {
+        for (Notification item : items) {
+            if (item.getUuid().equals(uuid)) {
+                return item;
+            }
+        }
+        return null;
     }
 
     public static NotificationRepo getInstance(Context c) {
