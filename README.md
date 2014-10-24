@@ -2,6 +2,3 @@ Send notifications to all members of your organization by using a Google Spreads
 
 This project started during the Opportunity Hack Austin 2014 Hackathon. Thanks to <everyone> for such a great weekend.
 
-Philosophy:
-Do one thing and do it well.
-
